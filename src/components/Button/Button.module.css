@@ -1,0 +1,103 @@
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.small {
+  padding: 8px 16px;
+  font-size: 14px;
+  min-height: 36px;
+}
+
+.medium {
+  padding: 12px 24px;
+  font-size: 16px;
+  min-height: 44px;
+}
+
+.large {
+  padding: 16px 32px;
+  font-size: 18px;
+  min-height: 52px;
+}
+
+.primary {
+  background-color: #712EFF;
+  color: white;
+}
+
+.primary:hover:not(:disabled) {
+    background-color: #5A1FD9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(113, 46, 255, 0.3);
+}
+
+.secondary {
+  background-color: transparent;
+  border: 1px solid #B18CFF;
+  border-radius: 43px;
+  color: #B18CFF;
+  padding: 12px 140px;
+}
+
+.secondary:hover:not(:disabled) {
+    background-color: #B18CFF;
+    color: white;
+}
+
+.danger {
+  background: 
+    linear-gradient(
+      90deg,
+      #566166 0%,
+      #9DA2A0 22%,
+      #838A88 45%,
+      #6B7476 58%,
+      #576266 68%,
+      #747A7B 84%,
+      #9DA2A0 100%
+    );
+  
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 120px;
+}
+
+.danger:hover:not(:disabled) {
+  background: 
+    linear-gradient(
+      90deg,
+      #4A5559 0%,
+      #8A9290 22%,
+      #737A78 45%,
+      #5B6466 58%,
+      #475256 68%,
+      #646A6B 84%,
+      #8A9290 100%
+    );
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+.button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.96);
+}
