@@ -1,0 +1,95 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.hiddenInput {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+
+.toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.toggle:not(.disabled):hover::before {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.1;
+}
+
+.toggle:active:not(.disabled)::before {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.15;
+    transition-duration: 0.05s;
+}
+
+.track {
+    display: flex;
+    align-items: center;
+    width: 60px;
+    height: 30px;
+    border-radius: 33px;
+    background-color: #b08aff;
+    transition: all 0.25s ease;
+    padding: 3px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
+.thumb {
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.checked .track {
+    background-color: #712eff;
+}
+
+.checked .thumb {
+    transform: translateX(31px);
+    background-color: #ffffff;
+}
+
+.label {
+    font-size: 16px;
+    color: #ffffff;
+    position: relative;
+    z-index: 1;
+}
+
+.toggle.disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+}
+
+.toggle.disabled::before {
+    display: none;
+}
+
+.toggle.disabled .thumb {
+    box-shadow: none;
+}
