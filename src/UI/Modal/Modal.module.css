@@ -1,0 +1,126 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease;
+}
+
+.modal {
+    background-color: #181818;
+    border-radius: 10px;
+    max-width: 90%;
+    max-height: 90vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.small {
+    max-width: 400px;
+}
+
+.medium {
+    max-width: 600px;
+}
+
+.large {
+    max-width: 720px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 15px 15px 40px;
+}
+
+.title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.body {
+    padding: 0 40px;
+    overflow-y: auto;
+    flex: 1;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.footer {
+    display: flex;
+    gap: 20px;
+    padding: 40px;
+}
+
+.footer button {
+    flex: 1;
+    padding: 20px 20px;
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    border: none;
+    box-sizing: border-box;
+}
+
+.cancelButton {
+    border: 1px solid #b18cff;
+    background: transparent;
+    color: #b18cff;
+}
+
+.cancelButton:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.confirmButton {
+    background: #b18cff;
+    color: #181818;
+}
+
+.confirmButton:hover:not(:disabled) {
+    background: #5a1fd9;
+}
+
+.confirmButton:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
