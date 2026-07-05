@@ -15,6 +15,7 @@ interface InputProps {
     disabled?: boolean;
     className?: string;
     name?: string;
+    style?: React.CSSProperties;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -30,6 +31,7 @@ const Input: React.FC<InputProps> = ({
     disabled = false,
     className = '',
     name,
+    style,
     ...rest
 }) => {
     const isError = state === 'error';
@@ -73,6 +75,7 @@ const Input: React.FC<InputProps> = ({
                 disabled={disabled}
                 required={required}
                 name={name}
+                style={style}
                 {...rest}
             />
 
