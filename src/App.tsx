@@ -6,8 +6,11 @@ import Checkbox from './UI/Checkbox/Checkbox';
 import Toggle from './UI/Toggle/Toggle';
 import Modal from './UI/Modal/Modal';
 import Navigation from './UI/Navigation/Navigation';
+import AuthPage from './pages/AuthPage';
 
 function App() {
+    const [currentPage, setCurrentPage] = useState<'auth' | 'main'>('auth');
+
     const [text, setText] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -47,6 +50,14 @@ function App() {
     const handleDelete = () => {
         console.log('Товар удалён');
         setIsConfirmModalOpen(false);
+    };
+
+    const handleAuthSuccess = () => {
+        setCurrentPage('main');
+    };
+
+    const handleLogout = () => {
+        setCurrentPage('auth');
     };
 
     const cityOptions = [
@@ -89,6 +100,10 @@ function App() {
         </svg>
     );
 
+    if (currentPage === 'auth') {
+        return <AuthPage onAuthSuccess={handleAuthSuccess} />;
+    }
+
     return (
         <div
             style={{
@@ -101,7 +116,12 @@ function App() {
                 color: 'white',
             }}
         >
-            <h1>Мой UI Kit</h1>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h1 style={{ margin: 0 }}>Мой UI Kit</h1>
+                <Button variant="secondary" onClick={handleLogout}>
+                    Выйти
+                </Button>
+            </div>
 
             <Navigation
                 logo="Shop"
@@ -137,7 +157,7 @@ function App() {
 
             <div>
                 <h2>Кнопки</h2>
-                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '20px' }}>
+                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
                     <Button variant="primary">Primary</Button>
                     <Button variant="secondary">Secondary</Button>
                     <Button variant="danger">Danger</Button>
@@ -308,7 +328,7 @@ function App() {
                         disabled
                     />
 
-                    <h3 style={{ fontSize: '16px', color: '#BCBCBC', margin: '36px 0 4px', textAlign: 'start' }}>
+                    <h3 style={{ fontSize: '16px', color: '#BCBCBC', margin: '8px 0 0 0' }}>
                         Промежуточное состояние
                     </h3>
 
@@ -358,6 +378,12 @@ function App() {
                     />
 
                     <Toggle
+                        label="Тёмная тема"
+                        checked={darkMode}
+                        onChange={setDarkMode}
+                    />
+
+                    <Toggle
                         label="Отключенный (вкл)"
                         checked={true}
                         disabled
@@ -372,7 +398,7 @@ function App() {
             </div>
 
             <div>
-                <h2 style={{ marginBottom: '26px' }}>Модальные окна</h2>
+                <h2>Модальные окна</h2>
                 <Button variant="primary" onClick={() => setIsModalOpen(true)}>
                     Открыть модалку
                 </Button>
