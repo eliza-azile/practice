@@ -3,30 +3,8 @@ import LoginPage from './LoginPage';
 import RegisterPage from './RegisterPage';
 
 
-interface AuthPageProps {
-    onAuthSuccess?: () => void;
-}
-
-const AuthPage: React.FC<AuthPageProps> = ({ onAuthSuccess }) => {
+const AuthPage: React.FC = () => {
     const [isLogin, setIsLogin] = useState(true);
-
-    const handleSwitchToRegister = () => {
-        setIsLogin(false);
-    };
-
-    const handleSwitchToLogin = () => {
-        setIsLogin(true);
-    };
-
-    const handleLogin = () => {
-        console.log('Успешный вход');
-        onAuthSuccess?.();
-    };
-
-    const handleRegister = () => {
-        console.log('Успешная регистрация');
-        onAuthSuccess?.();
-    };
 
     return (
         <div
@@ -41,13 +19,11 @@ const AuthPage: React.FC<AuthPageProps> = ({ onAuthSuccess }) => {
         >
             {isLogin ? (
                 <LoginPage
-                    onSwitchToRegister={handleSwitchToRegister}
-                    onLogin={handleLogin}
+                    onSwitchToRegister={() => setIsLogin(false)}
                 />
             ) : (
                 <RegisterPage
-                    onSwitchToLogin={handleSwitchToLogin}
-                    onRegister={handleRegister}
+                    onSwitchToLogin={() => setIsLogin(true)}
                 />
             )}
         </div>

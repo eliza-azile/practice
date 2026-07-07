@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 import Button from '../UI/Button/Button';
 import Input from '../UI/Input/Input';
 import Checkbox from '../UI/Checkbox/Checkbox';
@@ -7,13 +9,13 @@ import Select from '../UI/Select/Select';
 
 interface RegisterPageProps {
     onSwitchToLogin?: () => void;
-    onRegister?: () => void;
 }
 
-const RegisterPage: React.FC<RegisterPageProps> = ({
-    onSwitchToLogin,
-    onRegister,
+const RegisterPage: React.FC<RegisterPageProps> = ({onSwitchToLogin
 }) => {
+    const navigate = useNavigate();
+    const { login } = useAuth();
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -68,10 +70,18 @@ const RegisterPage: React.FC<RegisterPageProps> = ({
             setAgreeError(false);
         }
 
-        if (!hasError) {
-            console.log('Регистрация', { name, email, password, city });
-            onRegister?.();
-        }
+        if (hasError) return;
+
+        const mockUser = {
+            id: '1',
+            email,
+            name,
+            role: 'user' as const,
+        };
+        const mockToken = 'fake-jwt-token';
+
+        login(mockUser, mockToken);
+        navigate('/');
     };
 
     return (

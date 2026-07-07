@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 import Button from '../UI/Button/Button';
 import Input from '../UI/Input/Input';
 import Checkbox from '../UI/Checkbox/Checkbox';
@@ -6,13 +8,12 @@ import Checkbox from '../UI/Checkbox/Checkbox';
 
 interface LoginPageProps {
     onSwitchToRegister?: () => void;
-    onLogin?: () => void;
 }
 
-const LoginPage: React.FC<LoginPageProps> = ({
-    onSwitchToRegister,
-    onLogin,
-}) => {
+const LoginPage: React.FC<LoginPageProps> = ({onSwitchToRegister}) => {
+    const navigate = useNavigate();
+    const { login } = useAuth();
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
@@ -38,10 +39,18 @@ const LoginPage: React.FC<LoginPageProps> = ({
             setPasswordError(false);
         }
 
-        if (!hasError) {
-            console.log('Вход', { email, password, rememberMe });
-            onLogin?.();
-        }
+        if (hasError) return;
+
+        const mockUser = {
+            id: '1',
+            email,
+            name: email.split('@')[0],
+            role: email.includes('admin') ? 'admin' as const : 'user' as const,
+        };
+        const mockToken = 'fake-jwt-token';
+
+        login(mockUser, mockToken);
+        navigate('/');
     };
 
     return (
