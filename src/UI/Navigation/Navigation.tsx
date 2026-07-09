@@ -1,14 +1,12 @@
 import React from 'react';
 import styles from './Navigation.module.css';
 
-
 interface NavigationProps {
     logo?: React.ReactNode;
     links?: Array<{ label: string; href: string; active?: boolean }>;
-    cart?: React.ReactNode;
-    profile?: React.ReactNode;
     search?: React.ReactNode;
-    themeToggle?: React.ReactNode;
+    cart?: React.ReactNode;    // ← добавляем
+    profile?: React.ReactNode; // ← добавляем
     className?: string;
 }
 
@@ -18,12 +16,11 @@ const Navigation: React.FC<NavigationProps> = ({
         { label: 'Главная', href: '/', active: true },
         { label: 'Каталог', href: '/catalog' },
         { label: 'О нас', href: '/about' },
-        { label: 'Контакты', href: '/contacts' }
+        { label: 'Контакты', href: '/contacts' },
     ],
+    search,
     cart,
     profile,
-    search,
-    themeToggle,
     className = '',
 }) => {
     const containerClass = [
@@ -36,7 +33,7 @@ const Navigation: React.FC<NavigationProps> = ({
             <div className={styles.container}>
                 <div className={styles.logo}>{logo}</div>
 
-                <ul className={styles.link}>
+                <ul className={styles.links}>
                     {links.map((link, index) => (
                         <li key={index}>
                             <a
@@ -50,6 +47,11 @@ const Navigation: React.FC<NavigationProps> = ({
                 </ul>
 
                 {search && <div className={styles.search}>{search}</div>}
+
+                <div className={styles.actions}>
+                    {cart && cart}
+                    {profile && profile}
+                </div>
             </div>
         </nav>
     );
