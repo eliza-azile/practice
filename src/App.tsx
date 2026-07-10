@@ -9,6 +9,7 @@ import Admin from './pages/Admin';
 
 import Navigation from './UI/Navigation/Navigation';
 import Button from './UI/Button/Button';
+import Input from './UI/Input/Input';
 
 function AppContent() {
     return (
@@ -21,6 +22,25 @@ function AppContent() {
                     { label: 'О нас', href: '/about' },
                     { label: 'Контакты', href: '/contacts' },
                 ]}
+                search={
+                    <div style={{ position: 'relative', width: '100%' }}>
+                        <Input 
+                            placeholder="Поиск..."
+                            size="small"
+                            style={{ padding: '11px 15px' }}
+                        />
+                        <span style={{
+                            position: 'absolute',
+                            right: '15px',
+                            top: '55%',
+                            transform: 'translateY(-50%)',
+                            color: 'rgba(255,255,255,0.3)',
+                            pointerEvents: 'none',
+                        }}>
+                            🔍
+                        </span>
+                    </div>
+                }
                 profile={
                     <Link to="/profile">
                         <Button variant="secondary" size="small">

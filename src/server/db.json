@@ -1,0 +1,89 @@
+{
+    "users": [
+        {
+            "id": "1",
+            "email": "user@mail.ru",
+            "password": "123456",
+            "name": "Пользователь",
+            "role": "user"
+        },
+        {
+            "id": "2",
+            "email": "admin@mail.ru",
+            "password": "123456",
+            "name": "Администратор",
+            "role": "admin"
+        }
+    ],
+    "products": [
+        {
+            "id": 1,
+            "name": "Ноутбук",
+            "price": 999,
+            "category": "Электроника",
+            "image": "💻",
+            "description": "Мощный ноутбук для работы и игр"
+        },
+        {
+            "id": 2,
+            "name": "Смартфон",
+            "price": 599,
+            "category": "Электроника",
+            "image": "📱",
+            "description":"Современный смартфон с отличной камерой"
+        },
+        {
+            "id": 3,
+            "name": "Наушники",
+            "price": 199,
+            "category": "Электроника",
+            "image": "🎧",
+            "description": "Беспроводные наушники с шумоподавлением"
+        }, {
+            "id": 4,
+            "name": "Клавиатура",
+            "price": 89,
+            "category": "Электроника",
+            "description": "Механическая клавиатура для геймеров"
+        },
+        {
+            "id": 5,
+            "name": "Футболка",
+            "price": 29,
+            "category": "Одежда",
+            "image": "👕",
+            "description": "Хлопковая футболка классического кроя"
+        },
+        {
+            "id": 6,
+            "name": "Джинсы",
+            "price": 79,
+            "category": "Одежда",
+            "image": "👖",
+            "description": "Удобные джинсы из качественного денима"
+        }
+    ],
+    "orders": [
+        {
+            "id": 1,
+            "userId": "1",
+            "products": [
+                { "id": 1, "quantity": 1 },
+                { "id": 2, "quantity": 2 }
+            ],
+            "total": 2197,
+            "status": "Доставлен",
+            "date": "15.07.2026"
+        },
+        {
+            "id": 2,
+            "userId": "1",
+            "products": [
+                { "id": 3, "quantity": 1 }
+            ],
+            "total": 199,
+            "status": "В пути",
+            "date": "10.07.2026"
+        }
+    ]
+}
