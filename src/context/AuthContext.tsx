@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, type ReactNode } from 'react';
-
+import { api } from '../api/api';
 
 export interface User {
     id: string;
@@ -13,7 +13,8 @@ interface AuthContextType {
     token: string | null;
     isAuthenticated: boolean;
     isLoading: boolean;
-    login: (user: User, token: string) => void;
+    login: (email: string, password: string) => Promise<void>;
+    register: (data: { email: string, password: string; name?: string }) => Promise<void>;
     logout: () => void;
     updateUser: (data: Partial<User>) => void;
 }
@@ -36,18 +37,35 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             }
         } catch (error) {
             console.error('Ошибка загрузки из localStorage: ', error);
-            localStorage.removeItem('user');
-            localStorage.removeItem('token');
         } finally {
             setIsLoading(false);
         }
     }, []);
 
-    const login = (userData: User, authToken: string) => {
-        setUser(userData);
-        setToken(authToken);
-        localStorage.setItem('user', JSON.stringify(userData));
-        localStorage.setItem('token', authToken);
+    const login = async (email: string, password: string) => {
+        setIsLoading(true);
+        try {
+            const data = await api.post<{ user: User; token: string }>('/login', { email, password });
+            setUser(data.user);
+            setToken(data.token);
+            localStorage.setItem('user', JSON.stringify(data.user));
+            localStorage.setItem('token', data.token);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const register = async (data: { email: string; password: string; name?: string }) => {
+        setIsLoading(true);
+        try {
+            const response = await api.post<{ user: User; token: string }>('/register', data);
+            setUser(response.user);
+            setToken(response.token);
+            localStorage.setItem('user', JSON.stringify(response.user));
+            localStorage.setItem('token', response.token);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const logout = () => {
@@ -71,8 +89,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         isAuthenticated: !!user && !!token,
         isLoading,
         login,
+        register,
         logout,
-        updateUser
+        updateUser,
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

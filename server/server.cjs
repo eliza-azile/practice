@@ -1,6 +1,8 @@
-const jsonServer = require('json-sever');
+const jsonServer = require('json-server');
+const path = require('path');
+
 const server = jsonServer.create();
-const router = jsonServer.router('server/db.json');
+const router = jsonServer.router(path.join(__dirname, 'db.json'));
 const middlewares = jsonServer.defaults();
 
 server.use(middlewares);
@@ -11,8 +13,8 @@ server.use((req, res, next) => {
 });
 
 server.post('/api/login', (req, res) => {
-    const { email, password } = req.body,
-    const db = router.db,
+    const { email, password } = req.body;
+    const db = router.db;
     const user = db.get('users').find({ email, password }).value();
 
     if (user) {
@@ -22,11 +24,11 @@ server.post('/api/login', (req, res) => {
             token: 'fake-jwt-token-' + Date.now()
         });
     } else {
-        res.status(401).json({ error: 'Неверный email и пароль' });
+        res.status(401).json({ error: 'Неверный email или пароль' });
     }
 });
 
-server.post('api/register', (req, res) => {
+server.post('/api/register', (req, res) => {
     const { email, password, name } = req.body;
     const db = router.db;
 
@@ -64,7 +66,7 @@ server.get('/api/orders/:userId', (req, res) => {
     res.json(orders);
 });
 
-server.post('/api/orders', (req,res) => {
+server.post('/api/orders', (req, res) => {
     const { userId, products, total } = req.body;
     const db = router.db;
 
@@ -85,9 +87,9 @@ server.use(router);
 server.listen(3000, () => {
     console.log('API сервер запущен: http://localhost:3000');
     console.log('Доступные эндпоинты:');
-    console.log('POST /api/login');
-    console.log('POST /api/register');
-    console.log('GET /api/products');
-    console.log('GET /api/orders/:userId');
-    console.log('POST /api/orders');
+    console.log('   POST /api/login');
+    console.log('   POST /api/register');
+    console.log('   GET  /api/products');
+    console.log('   GET  /api/orders/:userId');
+    console.log('   POST /api/orders');
 });
