@@ -29,16 +29,6 @@ function AppContent() {
                             size="small"
                             style={{ padding: '11px 15px' }}
                         />
-                        <span style={{
-                            position: 'absolute',
-                            right: '15px',
-                            top: '55%',
-                            transform: 'translateY(-50%)',
-                            color: 'rgba(255,255,255,0.3)',
-                            pointerEvents: 'none',
-                        }}>
-                            🔍
-                        </span>
                     </div>
                 }
                 profile={

@@ -47,7 +47,7 @@
   border: 1px solid #B18CFF;
   border-radius: 43px;
   color: #B18CFF;
-  padding: 12px 140px;
+  padding: 12px 70px;
 }
 
 .secondary:hover:not(:disabled) {

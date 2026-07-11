@@ -5,8 +5,8 @@ interface NavigationProps {
     logo?: React.ReactNode;
     links?: Array<{ label: string; href: string; active?: boolean }>;
     search?: React.ReactNode;
-    cart?: React.ReactNode;    // ← добавляем
-    profile?: React.ReactNode; // ← добавляем
+    cart?: React.ReactNode;
+    profile?: React.ReactNode;
     className?: string;
 }
 

@@ -14,7 +14,6 @@ const Admin: React.FC = () => {
         navigate('/login');
     };
 
-    // Мок-данные
     const [products, setProducts] = useState([
         { id: 1, name: 'Ноутбук', price: 999, category: 'Электроника' },
         { id: 2, name: 'Смартфон', price: 599, category: 'Электроника' },
@@ -39,7 +38,7 @@ const Admin: React.FC = () => {
     };
 
     return (
-        <div style={{ padding: '40px', maxWidth: '1000px', margin: '0 auto', color: 'white' }}>
+        <div style={{ padding: '40px', margin: '0 auto', color: 'white' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h1>👑 Админ-панель</h1>
                 <Button variant="danger" size="small" onClick={handleLogout}>
@@ -47,9 +46,8 @@ const Admin: React.FC = () => {
                 </Button>
             </div>
 
-            <p>Добро пожаловать, <strong>{user?.name}</strong>!</p>
+            <p style={{ margin: '100px 0 50px', fontSize: '24px' }}>Добро пожаловать, <strong>{user?.name}</strong>!</p>
 
-            {/* Статистика */}
             <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
@@ -72,10 +70,9 @@ const Admin: React.FC = () => {
 
             {/* Управление товарами */}
             <div style={{ background: '#222', padding: '24px', borderRadius: '12px', marginTop: '20px' }}>
-                <h3 style={{ margin: '0 0 16px 0' }}>📦 Управление товарами</h3>
+                <h3 style={{ margin: '0 0 36px 0', fontSize: '28px', padding: '0 0 22px', borderBottom: '1px solid #ffffff23' }}>📦 Управление товарами</h3>
 
-                {/* Добавление товара */}
-                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
                     <div style={{ flex: '1', minWidth: '150px' }}>
                         <Input
                             placeholder="Название товара"

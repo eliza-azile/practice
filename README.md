@@ -1,75 +1,52 @@
-# React + TypeScript + Vite
+# Интернет-магазин (Pet-проект)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Описание проекта
 
-Currently, two official plugins are available:
+Pet-проект интернет-магазина с авторизацией, ролевой моделью (пользователь / администратор) и личным кабинетом. Реализована полная клиентская часть с эмуляцией API через json-server.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Технологии
 
-## React Compiler
+- **React** + **Vite** — быстрая разработка и сборка
+- **TypeScript** — типизация
+- **React Context** — управление состоянием авторизации
+- **React Router** — маршрутизация
+- **CSS Modules** — стилизация компонентов
+- **json-server** — эмуляция API (бэкенд)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Функциональность
 
-## Expanding the ESLint configuration
+### Для пользователей
+- ✅ Регистрация и авторизация
+- ✅ Просмотр каталога товаров на главной странице
+- ✅ Личный кабинет с историей заказов
+- ✅ Настройки профиля
+- ✅ Ролевая модель (пользователь / администратор)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Для администраторов
+- ✅ Админ-панель
+- ✅ Управление товарами (добавление/удаление)
+- ✅ Статистика по пользователям, заказам, товарам
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Общее
+- ✅ Защищённые маршруты (только для авторизованных)
+- ✅ Сохранение сессии в localStorage
+- ✅ Валидация форм
+- ✅ Единый стиль и UI Kit
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Страницы
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Страница | Маршрут | Доступ |
+|----------|---------|--------|
+| Главная (каталог) | `/` | Все |
+| Вход | `/login` | Все |
+| Регистрация | `/register` | Все |
+| Личный кабинет | `/profile` | Авторизованные |
+| Админ-панель | `/admin` | Только администраторы |
 
-```
+## Установка и запуск
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 1. Клонировать репозиторий
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+```bash
+git clone https://github.com/ВАШ_ЛОГИН/НАЗВАНИЕ_РЕПОЗИТОРИЯ.git
+cd НАЗВАНИЕ_РЕПОЗИТОРИЯ

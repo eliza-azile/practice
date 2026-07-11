@@ -32,25 +32,25 @@ const Home: React.FC = () => {
                 marginTop: '20px',
                 textAlign: 'center'
             }}>
-                <h2 style={{ margin: 0 }}>🔥 Летняя распродажа!</h2>
+                <h2 style={{ margin: 0, fontSize: '32px', fontWeight: '700px' }}>🔥 Летняя распродажа!</h2>
                 <p style={{ margin: '8px 0 0 0' }}>Скидки до 50% на все товары</p>
             </div>
 
-            <div style={{ display: 'flex', gap: '16px', marginTop: '30px', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '26px', marginTop: '30px', flexWrap: 'wrap' }}>
                 {['Электроника', 'Одежда', 'Книги', 'Дом и сад', 'Спорт'].map((category) => (
                     <span key={category} style={{
                         padding: '8px 16px',
                         background: '#222',
                         borderRadius: '20px',
                         cursor: 'pointer',
-                        fontSize: '14px'
+                        fontSize: '18px'
                     }}>
                         {category}
                     </span>
                 ))}
             </div>
 
-            <h2 style={{ marginTop: '30px' }}>Популярные товары</h2>
+            <h2 style={{ margin: '100px 0 30px', fontSize: '32px' }}>Популярные товары</h2>
             <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
@@ -63,7 +63,10 @@ const Home: React.FC = () => {
                         padding: '20px',
                         borderRadius: '12px',
                         textAlign: 'center',
-                        transition: 'transform 0.2s'
+                        transition: 'transform 0.2s',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '10px',
                     }}>
                         <div style={{ fontSize: '48px' }}>{product.image}</div>
                         <h4 style={{ margin: '10px 0 4px 0' }}>{product.name}</h4>

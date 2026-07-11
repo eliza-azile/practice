@@ -71,16 +71,8 @@ const RegisterPage: React.FC<RegisterPageProps> = ({onSwitchToLogin
         }
 
         if (hasError) return;
-
-        const mockUser = {
-            id: '1',
-            email,
-            name,
-            role: 'user' as const,
-        };
-        const mockToken = 'fake-jwt-token';
-
-        login(mockUser, mockToken);
+    
+        login(email, password);
         navigate('/');
     };
 
