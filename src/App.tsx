@@ -1,17 +1,28 @@
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { CartProvider, useCart } from './context/CartContext';
 import PrivateRoute from './components/PrivateRoute';
 
 import AuthPage from './pages/AuthPage';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Admin from './pages/Admin';
+import Catalog from './pages/Catalog';
+import About from './pages/About';
+import Contacts from './pages/Contacts';
+import Cart from './pages/Cart';
+
 
 import Navigation from './UI/Navigation/Navigation';
 import Button from './UI/Button/Button';
-import Input from './UI/Input/Input';
+import SearchInput from './components/SearchInput';
+
 
 function AppContent() {
+    const { totalItems } = useCart();
+    const [searchTerm, setSearchTerm] = useState('');
+
     return (
         <div style={{ backgroundColor: '#1A1A1A', minHeight: '100vh' }}>
             <Navigation
@@ -23,13 +34,7 @@ function AppContent() {
                     { label: 'Контакты', href: '/contacts' },
                 ]}
                 search={
-                    <div style={{ position: 'relative', width: '100%' }}>
-                        <Input 
-                            placeholder="Поиск..."
-                            size="small"
-                            style={{ padding: '11px 15px' }}
-                        />
-                    </div>
+                    <SearchInput value={searchTerm} onChange={setSearchTerm} />
                 }
                 profile={
                     <Link to="/profile">
@@ -41,16 +46,21 @@ function AppContent() {
                 cart={
                     <Link to="/cart">
                         <Button variant="primary" size="small">
-                            🛒 Корзина
+                            🛒 Корзина ({totalItems})
                         </Button>
                     </Link>
                 }
             />
 
             <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Home searchTerm={searchTerm}/>} />
                 <Route path="/login" element={<AuthPage />} />
                 <Route path="/register" element={<AuthPage />} />
+                <Route  path="/catalog" element={<Catalog searchTerm={searchTerm} />} />
+                <Route path='/about' element={<About />} />
+                <Route path='/contacts' element={<Contacts />} />
+                <Route path='/cart' element={<Cart />} />
+
 
                 <Route
                     path="/profile"
@@ -77,9 +87,11 @@ function AppContent() {
 function App() {
     return (
         <AuthProvider>
-            <BrowserRouter>
-                <AppContent />
-            </BrowserRouter>
+            <CartProvider>
+                <BrowserRouter>
+                    <AppContent />
+                </BrowserRouter>
+            </CartProvider>
         </AuthProvider>
     );
 }

@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
+import { useCart } from '../context/CartContext';
 import Button from '../UI/Button/Button';
+import type { Product } from '../api/products';
 
-const Home: React.FC = () => {
+interface HomeProps {
+    searchTerm?: string;
+}
+
+const Home: React.FC<HomeProps> = ({ searchTerm='' }) => {
     const { user } = useAuth();
+    const { addToCart } = useCart();
+    const [products, setProducts] = useState<Product[]>([]);
 
-    const products = [
-        { id: 1, name: 'Ноутбук', price: 999, image: '💻' },
-        { id: 2, name: 'Смартфон', price: 599, image: '📱' },
-        { id: 3, name: 'Наушники', price: 199, image: '🎧' },
-        { id: 4, name: 'Клавиатура', price: 89, image: '⌨️' },
-    ];
+    useEffect(() => {
+        fetch('http://localhost:3000/products')
+            .then(res => res.json())
+            .then(data => setProducts(data));
+    }, []);
+
+    const filteredProducts = products.filter(product => 
+        product.name.toLowerCase().includes(searchTerm.toLocaleLowerCase())
+    );
 
     return (
         <div style={{ padding: '40px', maxWidth: '1200px', margin: '0 auto', color: 'white' }}>
@@ -50,14 +61,16 @@ const Home: React.FC = () => {
                 ))}
             </div>
 
-            <h2 style={{ margin: '100px 0 30px', fontSize: '32px' }}>Популярные товары</h2>
+            <h2 style={{ margin: '100px 0 30px', fontSize: '32px' }}>
+                Популярные товары
+            </h2>
             <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
                 gap: '20px',
                 marginTop: '10px'
             }}>
-                {products.map((product) => (
+                {filteredProducts.map((product) => (
                     <div key={product.id} style={{
                         background: '#222',
                         padding: '20px',
@@ -71,7 +84,13 @@ const Home: React.FC = () => {
                         <div style={{ fontSize: '48px' }}>{product.image}</div>
                         <h4 style={{ margin: '10px 0 4px 0' }}>{product.name}</h4>
                         <p style={{ color: '#b18cff', fontWeight: 'bold' }}>${product.price}</p>
-                        <Button variant="primary" size="small">В корзину</Button>
+                        <Button 
+                            variant="primary" 
+                            size="small"
+                            onClick={() => addToCart({ id: product.id, name: product.name, price: product.price, image: product.image })}
+                        >
+                            В корзину
+                        </Button>
                     </div>
                 ))}
             </div>
